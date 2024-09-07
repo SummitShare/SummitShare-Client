@@ -101,7 +101,7 @@
   },
   "description": "SummitShare Platform Client Application",
   "main": "index.js",
-  "repository": "SummitShare.co",
+  "repository": "https://SummitShare.co",
   "author": "https://github.com/SummitShare",
   "license": "MIT"
 }

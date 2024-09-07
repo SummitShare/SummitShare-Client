@@ -1,8 +1,9 @@
 {
   "name": "@rev-share/dapp",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
+    "i" : "yarn install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -97,5 +98,10 @@
   },
   "overrides": {
     "three": "^0.154.0"
-  }
+  },
+  "description": "SummitShare Platform Client Application",
+  "main": "index.js",
+  "repository": "SummitShare.co",
+  "author": "https://github.com/SummitShare",
+  "license": "MIT"
 }

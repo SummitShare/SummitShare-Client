@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { StarIcon } from '@radix-ui/react-icons';
 import { Metadata } from 'next';
 
+
 const metadata: Metadata = {
   title: 'SummitShare',
   description:
@@ -92,7 +93,7 @@ export default function Home() {
           <div>
             <Link href={'/cya'}>
               <Buttons type="primary" size="large">
-                Coming Soon!
+                Enter
               </Buttons>
             </Link>
           </div>

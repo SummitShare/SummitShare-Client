@@ -18,8 +18,16 @@ import Buttons from '@/app/components/button/Butons';
 import WalletStatus from './walletStatus';
 import Image from 'next/image';
 import axios from 'axios';
+import { calculateTimeLeft, isCountdownComplete, TimeLeft } from '@/functonality/countdownTimer';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
+type ButtonType = 'primary' | 'secondary' | 'tartary' | 'subTartary';
+interface ButtonConfig {
+  text: string;
+  action: () => void;
+  type: ButtonType;
+}
 const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const session = useSession();
   const [isVisible, setIsVisible] = useState(false);
@@ -31,6 +39,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   >('primary');
   const [buttonText, setButtonText] = useState('Pay');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const user_id = session.data?.user.id;
   const host = process.env.NEXT_PUBLIC_HOST;
@@ -45,6 +54,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const [provider, setProvider] =
     useState<ethers.providers.Web3Provider | null>(null);
   const [purchaseSuccessful, setPurchaseSuccessful] = useState<boolean>(false);
+  const [isCountdownOver, setIsCountdownOver] = useState(false);
   const [purchaseFailed, setPurchaseFailed] = useState<boolean>(false);
   const [hasTicket, setHasTicket] = useState(false);
   const exhibit = useExhibit(exhibitId);
@@ -83,10 +93,27 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     }
   }, [status]);
 
+    // Check countdown status periodically
+    useEffect(() => {
+      const checkCountdown = () => {
+        const timeLeft = calculateTimeLeft();
+        setIsCountdownOver(!timeLeft);
+      };
+  
+      // Check initially
+      checkCountdown();
+  
+      // Set up interval to check countdown
+      const timer = setInterval(checkCountdown, 1000);
+  
+      return () => clearInterval(timer);
+    }, []);
+
   // Effect hook to trigger actions post successful ticketPurchase
   useEffect(() => {
     if (purchaseSuccessful) {
       setIsPopupVisible(false);
+      setShowSuccessMessage(true);
       setButtonType('secondary');
     }
   }, [purchaseSuccessful]);
@@ -127,7 +154,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
 
   // Assign ticekt price  from exhibit object and format to human readable (normal) integers
   const ticketPriceWei = BigInt(ticketPrice);
-  const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 6);
+  const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 18);
   const ticketPriceWithToken = `${ticketPriceFormatted} USDT`;
 
   // Estimate gas fees function for app. and purchase to display on total tickt amount on purchase component
@@ -320,25 +347,70 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     }
   };
 
+    // Modify the button text and action based on purchase and countdown status
+    const getButtonConfig = () => {
+      if (purchaseSuccessful) {
+        if (isCountdownOver) {
+          return {
+            text: 'View Exhibit',
+            action: () => window.open('https://summitshare.co/exhibit', '_blank'),
+            type: 'secondary' as "secondary"
+          };
+        }
+        return {
+          text: 'Ticket Purchased ✓',
+          action: () => {},
+          type: 'secondary' as "secondary"
+        };
+      }
+      return {
+        text: 'Purchase',
+        action: togglePopup,
+        type: 'primary' as "primary"
+      };
+    };
+
+    const buttonConfig = getButtonConfig();
+
   // Render component UI
   return (
     <>
-      <Buttons
-        type={buttonType}
-        size="large"
-        onClick={
-          purchaseSuccessful
-            ? () =>
-                window.open(
-                  'https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N',
-                  '_blank'
-                )
-            : togglePopup
-        }
-        disabled={false}
-      >
-        {purchaseSuccessful ? 'View Exhibit' : 'Purchase'}
-      </Buttons>
+<div className="transform scale-200">
+  <Buttons
+    type={buttonConfig.type}
+    size="large"
+    onClick={buttonConfig.action}
+    disabled={false}
+    //@ts-ignore
+    style={{
+      border: '2px solid white', // White edges
+      backgroundColor: 'transparent', // Optional: make the background transparent
+      color: 'white', // Text color
+      padding: '16px 32px', // Increased padding for a bigger button
+      fontSize: '1.5rem', // Increased font size for better visibility
+      borderRadius: '8px', // Rounded corners
+      transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
+      cursor: 'pointer', // Pointer cursor on hover
+      display: 'flex', // Use flexbox to align text
+      justifyContent: 'center', // Center horizontally
+      alignItems: 'center', // Center vertically
+      textAlign: 'center', // Center text
+    }}
+    onMouseEnter={(e: { currentTarget: { style: { backgroundColor: string; transform: string; }; }; }) => {
+      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; // Change background on hover
+      e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
+    }}
+    onMouseLeave={(e: { currentTarget: { style: { backgroundColor: string; transform: string; }; }; }) => {
+      e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
+      e.currentTarget.style.transform = 'scale(1)'; // Reset size
+    }}
+  >
+    {buttonConfig.text}
+  </Buttons>
+</div>
+
+
+
 
       {isPopupVisible && !purchaseSuccessful && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -452,29 +524,49 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
         </div>
       )}
 
-      {purchaseSuccessful && (
+ {/* Post-Purchase Notification */}
+ {purchaseSuccessful && (
         <div className="fixed bottom-5 right-5 z-50">
-          <a
-            href="https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Buttons type="secondary" size="large">
-              View Exhibit
-            </Buttons>
-          </a>
+          {isCountdownOver ? (
+            <a
+              href="https://summitshare.co/exhibit"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Buttons type="secondary" size="large">
+                View Exhibit
+              </Buttons>
+            </a>
+          ) : (
+            <div className="bg-white p-4 rounded-lg shadow-lg">
+              <p className="text-sm text-gray-700">
+                Thank you for your purchase! The exhibit will be available when
+                the countdown ends.
+              </p>
+            </div>
+          )}
         </div>
       )}
 
+      {/* Status Message Toast */}
       <div
         className={`bg-green-500 border w-[90%] md:w-fit rounded-md p-3 fixed right-5 z-50 transition-transform duration-500 border-green-300 ${
           isVisible ? 'translate-y-0 bottom-5' : 'translate-y-full -bottom-20'
         }`}
       >
-        {status && <p className="text-sm text-white font-semibold">{status}</p>}
+        {status && (
+          <p className="text-sm text-white font-semibold">
+            {status}
+            {purchaseSuccessful && !isCountdownOver && (
+              <span>
+                {' '}
+                The exhibit will be available when the countdown ends.
+              </span>
+            )}
+          </p>
+        )}
       </div>
     </>
   );
-};
-
+}
 export default TicketPurchaseComponent;

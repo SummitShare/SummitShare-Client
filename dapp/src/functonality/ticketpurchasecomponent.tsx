@@ -351,8 +351,6 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     }
   };
 
-
-
   // Modify the button text and action based on purchase and countdown status
   const getButtonConfig = () => {
     if (purchaseSuccessful) {
@@ -570,13 +568,15 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
               <h3 className="text-2xl font-bold text-gray-900">
                 Ticket Purchase Successful!
               </h3>
-              
+
               <div className="space-y-3 text-gray-600">
                 <p>
-                  Thank you for your purchase! You will receive an email with further details shortly.
+                  Thank you for your purchase! You will receive an email with
+                  further details shortly.
                 </p>
                 <p>
-                  Your ticket NFT will appear in the wallet you used for purchase:
+                  Your ticket NFT will appear in the wallet you used for
+                  purchase:
                   <span className="block mt-1 text-sm font-mono bg-gray-100 p-2 rounded">
                     {userAddress}
                   </span>

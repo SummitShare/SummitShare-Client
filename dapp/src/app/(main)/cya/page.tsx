@@ -53,11 +53,12 @@ const ResponsiveVideo: React.FC = () => {
 };
 
 export default function Cya() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(
-    calculateTimeLeft()
-  );
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
+  // Check if we are running in the browser
   useEffect(() => {
+    setIsClient(true); // Hydrate the client
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
@@ -72,13 +73,14 @@ export default function Cya() {
 
       {/* Content */}
       <div className="relative h-full flex flex-col items-center justify-center text-white z-10">
-        <h1 className="text-5xl font-extrabold mb-4 text-white tracking-wide">
+        <h1 className="text-5xl font-extrabold mb-4 text-brown tracking-wide">
           Coming Soon...
         </h1>
         <div className="text-center max-w-2xl mb-12">
           <p className="text-xl text-white mb-2">
-            Prepare to experience the &ldquo;Leading Ladies&ldquo;. An educational and
-            interactive experience, one of the first of its kind...
+            Prepare to experience the &ldquo;Leading Ladies&ldquo;. An
+            educational and interactive experience, one of the first of its
+            kind...
           </p>
         </div>
 
@@ -119,7 +121,32 @@ export default function Cya() {
           <TicketPurchaseComponent userAddress={''} />
         </div>
 
-        {/* Follow Socials - Different color */}
+        <div className="flex flex-col items-center mt-12">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            {/* First section: 6 Unique Stories and Artifacts */}
+            <div className="flex flex-col items-center">
+              <div className="text-6xl font-bold">6</div>
+              <div className="text-lg text-gray-300">
+                Unique Stories and Artifacts
+              </div>
+            </div>
+
+            {/* Second section: Incrementing Tickets Sold */}
+            <div className="flex flex-col items-center">
+              {/* #TODO implement live tracking or periodical tracking */}
+              <div className="text-6xl font-bold">5</div>
+              <div className="text-lg text-gray-300">Tickets Sold</div>
+            </div>
+
+            {/* Third section: 1 Collective Legacy */}
+            <div className="flex flex-col items-center">
+              <div className="text-6xl font-bold">1</div>
+              <div className="text-lg text-gray-300">Collective Legacy</div>
+            </div>
+          </div>
+        </div>
+
+        {/*  Different color */}
         <Link
           href="https://summitshare.co/blog/SJZH2lwwA"
           className="text-lg text-white underline hover:text-gray-300 transition-colors"

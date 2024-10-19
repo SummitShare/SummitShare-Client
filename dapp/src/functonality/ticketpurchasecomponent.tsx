@@ -26,12 +26,8 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
-type ButtonType = 'primary' | 'secondary' | 'tartary' | 'subTartary';
-interface ButtonConfig {
-  text: string;
-  action: () => void;
-  type: ButtonType;
-}
+// # TODO : CLEAN UP A LOT
+
 const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const session = useSession();
   const [isVisible, setIsVisible] = useState(false);
@@ -265,6 +261,10 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     setIsPopupVisible(!isPopupVisible);
   };
 
+  const closeSuccessMessage = () => {
+    setShowSuccessMessage(false);
+  };
+
   // Function to handle ticket purchase
   const purchaseTicket = async () => {
     if (!provider) {
@@ -350,6 +350,8 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       setButtonText('Pay');
     }
   };
+
+
 
   // Modify the button text and action based on purchase and countdown status
   const getButtonConfig = () => {
@@ -533,6 +535,73 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
         </div>
       )}
 
+      {/* Success Message Popup */}
+      {showSuccessMessage && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="relative bg-white rounded-2xl shadow-xl w-[90%] max-w-md p-8">
+            {/* Close Button */}
+            <button
+              onClick={closeSuccessMessage}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <XMarkIcon className="h-6 w-6" />
+            </button>
+
+            {/* Success Content */}
+            <div className="text-center space-y-4">
+              {/* Success Icon */}
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <svg
+                  className="w-8 h-8 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+
+              {/* Success Message */}
+              <h3 className="text-2xl font-bold text-gray-900">
+                Ticket Purchase Successful!
+              </h3>
+              
+              <div className="space-y-3 text-gray-600">
+                <p>
+                  Thank you for your purchase! You will receive an email with further details shortly.
+                </p>
+                <p>
+                  Your ticket NFT will appear in the wallet you used for purchase:
+                  <span className="block mt-1 text-sm font-mono bg-gray-100 p-2 rounded">
+                    {userAddress}
+                  </span>
+                </p>
+                {!isCountdownOver && (
+                  <p className="text-sm text-gray-500 mt-4">
+                    The exhibit will be accessible when the countdown ends.
+                  </p>
+                )}
+              </div>
+
+              {/* Action Button */}
+              <div className="mt-8">
+                <button
+                  onClick={closeSuccessMessage}
+                  className="w-full bg-primary text-white rounded-lg px-4 py-2 hover:bg-primary-dark transition-colors"
+                >
+                  Got it, thanks!
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Post-Purchase Notification */}
       {purchaseSuccessful && (
         <div className="fixed bottom-5 right-5 z-50">
@@ -578,4 +647,5 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     </>
   );
 };
+
 export default TicketPurchaseComponent;

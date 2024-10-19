@@ -77,7 +77,7 @@ export default function Cya() {
         </h1>
         <div className="text-center max-w-2xl mb-12">
           <p className="text-xl text-white mb-2">
-            Prepare to experience the "Leading Ladies". An educational and
+            Prepare to experience the &ldquo;Leading Ladies&ldquo;. An educational and
             interactive experience, one of the first of its kind...
           </p>
         </div>

@@ -260,3 +260,6 @@ export interface StepCardProps {
   isCompleted: boolean;
   onClick: () => void; // Function that takes no arguments and returns nothing
 }
+
+
+

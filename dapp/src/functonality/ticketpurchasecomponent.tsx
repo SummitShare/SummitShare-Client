@@ -18,7 +18,11 @@ import Buttons from '@/app/components/button/Butons';
 import WalletStatus from './walletStatus';
 import Image from 'next/image';
 import axios from 'axios';
-import { calculateTimeLeft, isCountdownComplete, TimeLeft } from '@/functonality/countdownTimer';
+import {
+  calculateTimeLeft,
+  isCountdownComplete,
+  TimeLeft,
+} from '@/functonality/countdownTimer';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -93,21 +97,21 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     }
   }, [status]);
 
-    // Check countdown status periodically
-    useEffect(() => {
-      const checkCountdown = () => {
-        const timeLeft = calculateTimeLeft();
-        setIsCountdownOver(!timeLeft);
-      };
-  
-      // Check initially
-      checkCountdown();
-  
-      // Set up interval to check countdown
-      const timer = setInterval(checkCountdown, 1000);
-  
-      return () => clearInterval(timer);
-    }, []);
+  // Check countdown status periodically
+  useEffect(() => {
+    const checkCountdown = () => {
+      const timeLeft = calculateTimeLeft();
+      setIsCountdownOver(!timeLeft);
+    };
+
+    // Check initially
+    checkCountdown();
+
+    // Set up interval to check countdown
+    const timer = setInterval(checkCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   // Effect hook to trigger actions post successful ticketPurchase
   useEffect(() => {
@@ -347,70 +351,75 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     }
   };
 
-    // Modify the button text and action based on purchase and countdown status
-    const getButtonConfig = () => {
-      if (purchaseSuccessful) {
-        if (isCountdownOver) {
-          return {
-            text: 'View Exhibit',
-            action: () => window.open('https://summitshare.co/exhibit', '_blank'),
-            type: 'secondary' as "secondary"
-          };
-        }
+  // Modify the button text and action based on purchase and countdown status
+  const getButtonConfig = () => {
+    if (purchaseSuccessful) {
+      if (isCountdownOver) {
         return {
-          text: 'Ticket Purchased ✓',
-          action: () => {},
-          type: 'secondary' as "secondary"
+          text: 'View Exhibit',
+          action: () => window.open('https://summitshare.co/exhibit', '_blank'),
+          type: 'secondary' as 'secondary',
         };
       }
       return {
-        text: 'Purchase',
-        action: togglePopup,
-        type: 'primary' as "primary"
+        text: 'Ticket Purchased ✓',
+        action: () => {},
+        type: 'secondary' as 'secondary',
       };
+    }
+    return {
+      text: 'Purchase',
+      action: togglePopup,
+      type: 'primary' as 'primary',
     };
+  };
 
-    const buttonConfig = getButtonConfig();
+  const buttonConfig = getButtonConfig();
 
   // Render component UI
   return (
     <>
-<div className="transform scale-200">
-  <Buttons
-    type={buttonConfig.type}
-    size="large"
-    onClick={buttonConfig.action}
-    disabled={false}
-    //@ts-ignore
-    style={{
-      border: '2px solid white', // White edges
-      backgroundColor: 'transparent', // Optional: make the background transparent
-      color: 'white', // Text color
-      padding: '16px 32px', // Increased padding for a bigger button
-      fontSize: '1.5rem', // Increased font size for better visibility
-      borderRadius: '8px', // Rounded corners
-      transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
-      cursor: 'pointer', // Pointer cursor on hover
-      display: 'flex', // Use flexbox to align text
-      justifyContent: 'center', // Center horizontally
-      alignItems: 'center', // Center vertically
-      textAlign: 'center', // Center text
-    }}
-    onMouseEnter={(e: { currentTarget: { style: { backgroundColor: string; transform: string; }; }; }) => {
-      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; // Change background on hover
-      e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
-    }}
-    onMouseLeave={(e: { currentTarget: { style: { backgroundColor: string; transform: string; }; }; }) => {
-      e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
-      e.currentTarget.style.transform = 'scale(1)'; // Reset size
-    }}
-  >
-    {buttonConfig.text}
-  </Buttons>
-</div>
-
-
-
+      <div className="transform scale-200">
+        <Buttons
+          type={buttonConfig.type}
+          size="large"
+          onClick={buttonConfig.action}
+          disabled={false}
+          //@ts-ignore
+          style={{
+            border: '2px solid white', // White edges
+            backgroundColor: 'transparent', // Optional: make the background transparent
+            color: 'white', // Text color
+            padding: '16px 32px', // Increased padding for a bigger button
+            fontSize: '1.5rem', // Increased font size for better visibility
+            borderRadius: '8px', // Rounded corners
+            transition: 'background-color 0.3s, transform 0.3s', // Smooth transitions
+            cursor: 'pointer', // Pointer cursor on hover
+            display: 'flex', // Use flexbox to align text
+            justifyContent: 'center', // Center horizontally
+            alignItems: 'center', // Center vertically
+            textAlign: 'center', // Center text
+          }}
+          onMouseEnter={(e: {
+            currentTarget: {
+              style: { backgroundColor: string; transform: string };
+            };
+          }) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)'; // Change background on hover
+            e.currentTarget.style.transform = 'scale(1.05)'; // Slightly enlarge button on hover
+          }}
+          onMouseLeave={(e: {
+            currentTarget: {
+              style: { backgroundColor: string; transform: string };
+            };
+          }) => {
+            e.currentTarget.style.backgroundColor = 'transparent'; // Reset background
+            e.currentTarget.style.transform = 'scale(1)'; // Reset size
+          }}
+        >
+          {buttonConfig.text}
+        </Buttons>
+      </div>
 
       {isPopupVisible && !purchaseSuccessful && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -524,8 +533,8 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
         </div>
       )}
 
- {/* Post-Purchase Notification */}
- {purchaseSuccessful && (
+      {/* Post-Purchase Notification */}
+      {purchaseSuccessful && (
         <div className="fixed bottom-5 right-5 z-50">
           {isCountdownOver ? (
             <a
@@ -568,5 +577,5 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       </div>
     </>
   );
-}
+};
 export default TicketPurchaseComponent;

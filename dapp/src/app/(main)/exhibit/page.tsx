@@ -43,29 +43,30 @@ export default function Home() {
         <div className="w-full md:w-[45%] h-[342px] rounded-[0.5rem] overflow-hidden bg-[url('https://images.squarespace-cdn.com/content/v1/5878a307ebbd1ab23e1ed5a0/1650963860604-LGJSBAWOMLQIU9ZXUK1K/all-women.71ba3487f51cab4dc38a.png?format=2500w')] bg-cover bg-primary-50 bg-center "></div>
 
         <div className="md:w-[45%] md:flex md:flex-col md:justify-between">
-  <div className="space-y-2">
-    <h2>The Leading Ladies</h2>
-    <p>
-      Those who walked before us and those to come. Those who wore red
-      clay masks and rested their heads on bended knees. Those who
-      washed the cowry bead and swung the snuff cup.Those who weaved the
-      baskets and wrapped the cloth. Those who fought for peace and
-      danced to the drum.
-    </p>
-  </div>
-  <div className="mt-14 mx-4"> {/* Moved this outside and adjusted margin */}
-    <a
-      href="https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <Buttons type="secondary" size="large">
-        View Exhibit
-      </Buttons>
-    </a>
-  </div>
-</div>
-
+          <div className="space-y-2">
+            <h2>The Leading Ladies</h2>
+            <p>
+              Those who walked before us and those to come. Those who wore red
+              clay masks and rested their heads on bended knees. Those who
+              washed the cowry bead and swung the snuff cup.Those who weaved the
+              baskets and wrapped the cloth. Those who fought for peace and
+              danced to the drum.
+            </p>
+          </div>
+          <div className="mt-14 mx-4">
+            {' '}
+            {/* Moved this outside and adjusted margin */}
+            <a
+              href="https://oncyber.io/spaces/89cp8FpYgF5hgrHk1i3N"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Buttons type="secondary" size="large">
+                View Exhibit
+              </Buttons>
+            </a>
+          </div>
+        </div>
       </section>
 
       <section className="w-full space-y-6">

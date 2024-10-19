@@ -1,6 +1,10 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { calculateTimeLeft, isCountdownComplete, TimeLeft } from '@/functonality/countdownTimer';
+import {
+  calculateTimeLeft,
+  isCountdownComplete,
+  TimeLeft,
+} from '@/functonality/countdownTimer';
 import TicketPurchaseComponent from '@/functonality/ticketpurchasecomponent';
 import WalletStatus from '@/functonality/walletStatus';
 import { useAccount } from 'wagmi';
@@ -12,7 +16,7 @@ const ResponsiveVideo: React.FC = () => {
   // Function to check window width
   const handleResize = () => {
     if (window.innerWidth <= 768) {
-      setIsMobile(true);  // Mobile version if width is 768px or less
+      setIsMobile(true); // Mobile version if width is 768px or less
     } else {
       setIsMobile(false); // Desktop version if width is greater than 768px
     }
@@ -48,10 +52,10 @@ const ResponsiveVideo: React.FC = () => {
   );
 };
 
-
-
 export default function Cya() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(
+    calculateTimeLeft()
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -73,7 +77,8 @@ export default function Cya() {
         </h1>
         <div className="text-center max-w-2xl mb-12">
           <p className="text-xl text-white mb-2">
-          Prepare to experience the "Leading Ladies". An educational and interactive experience, one of the first of its kind...
+            Prepare to experience the "Leading Ladies". An educational and
+            interactive experience, one of the first of its kind...
           </p>
         </div>
 
@@ -81,19 +86,27 @@ export default function Cya() {
         {timeLeft ? (
           <div className="grid grid-cols-4 gap-6 mb-12">
             <div className="flex flex-col items-center">
-              <div className="text-5xl font-bold mb-2 text-white">{timeLeft.days}</div>
+              <div className="text-5xl font-bold mb-2 text-white">
+                {timeLeft.days}
+              </div>
               <div className="text-sm uppercase text-white">Days</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-5xl font-bold mb-2 text-white">{timeLeft.hours}</div>
+              <div className="text-5xl font-bold mb-2 text-white">
+                {timeLeft.hours}
+              </div>
               <div className="text-sm uppercase text-white">Hours</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-5xl font-bold mb-2 text-white">{timeLeft.minutes}</div>
+              <div className="text-5xl font-bold mb-2 text-white">
+                {timeLeft.minutes}
+              </div>
               <div className="text-sm uppercase text-white">Minutes</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-5xl font-bold mb-2 text-white">{timeLeft.seconds}</div>
+              <div className="text-5xl font-bold mb-2 text-white">
+                {timeLeft.seconds}
+              </div>
               <div className="text-sm uppercase text-white">Seconds</div>
             </div>
           </div>
@@ -107,15 +120,15 @@ export default function Cya() {
         </div>
 
         {/* Follow Socials - Different color */}
-        <Link 
-            href="https://summitshare.co/blog/SJZH2lwwA" 
-            className="text-lg text-white underline hover:text-gray-300 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            learn more here
-          </Link>
+        <Link
+          href="https://summitshare.co/blog/SJZH2lwwA"
+          className="text-lg text-white underline hover:text-gray-300 transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          learn more here
+        </Link>
       </div>
     </main>
   );
-  }
+}

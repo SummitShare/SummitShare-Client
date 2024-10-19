@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { StarIcon } from '@radix-ui/react-icons';
 import { Metadata } from 'next';
 
-
 const metadata: Metadata = {
   title: 'SummitShare',
   description:

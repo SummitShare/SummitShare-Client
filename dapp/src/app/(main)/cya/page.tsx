@@ -75,19 +75,20 @@ export default function Cya() {
 
       {/* Content */}
       <div className="relative h-full flex flex-col items-center justify-center text-white z-10 px-4 py-8">
-  <div className="mt-20 md:mt-0"> {/* Added margin top for mobile */}
-    <h1 className="text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 text-brown tracking-wide text-center">
-      {isComplete ? "Coming Soon..." : "Welcome!"}
-    </h1>
-      
-    <div className="text-center max-w-2xl mb-8 md:mb-12 px-4">
-      <p className="text-lg md:text-xl text-white mb-2 leading-relaxed">
-        Prepare to experience the &ldquo;Leading Ladies&ldquo;. An
-        educational and interactive experience, one of the first of its
-        kind...
-      </p>
-    </div>
-    </div>
+        <div className="mt-20 md:mt-0">
+          {' '}
+          {/* Added margin top for mobile */}
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 text-brown tracking-wide text-center">
+            {isComplete ? 'Coming Soon...' : 'Welcome!'}
+          </h1>
+          <div className="text-center max-w-2xl mb-8 md:mb-12 px-4">
+            <p className="text-lg md:text-xl text-white mb-2 leading-relaxed">
+              Prepare to experience the &ldquo;Leading Ladies&ldquo;. An
+              educational and interactive experience, one of the first of its
+              kind...
+            </p>
+          </div>
+        </div>
         {/* Countdown Timer */}
         {timeLeft ? (
           <div className="grid grid-cols-4 gap-6 mb-12">
@@ -118,37 +119,39 @@ export default function Cya() {
           </div>
         ) : (
           <div className="grid grid-cols-4 gap-6 mb-12">
-          <div className="flex flex-col items-center">
-            <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800 ">
-              00
+            <div className="flex flex-col items-center">
+              <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800 ">
+                00
+              </div>
+              <div className="text-sm uppercase text-white">Days</div>
             </div>
-            <div className="text-sm uppercase text-white">Days</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
-              00
+            <div className="flex flex-col items-center">
+              <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
+                00
+              </div>
+              <div className="text-sm uppercase text-white">Hours</div>
             </div>
-            <div className="text-sm uppercase text-white">Hours</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
-              00
+            <div className="flex flex-col items-center">
+              <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
+                00
+              </div>
+              <div className="text-sm uppercase text-white">Minutes</div>
             </div>
-            <div className="text-sm uppercase text-white">Minutes</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
-              00
+            <div className="flex flex-col items-center">
+              <div className="text-5xl font-bold mb-2 animate-pulse text-amber-800">
+                00
+              </div>
+              <div className="text-sm uppercase text-white">Seconds</div>
             </div>
-            <div className="text-sm uppercase text-white">Seconds</div>
+            <div
+              className="absolute w-full text-center"
+              style={{ top: '-2rem' }}
+            >
+              <span className="inline-block animate-pulse text-amber-800 font-bold text-xl">
+                Exhibit Now Open!
+              </span>
+            </div>
           </div>
-          <div className="absolute w-full text-center" style={{ top: '-2rem' }}>
-            <span className="inline-block animate-pulse text-amber-800 font-bold text-xl">
-              Exhibit Now Open!
-            </span>
-          </div>
-        </div>
-
         )}
 
         {/* Ticket Purchase Section */}

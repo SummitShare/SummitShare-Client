@@ -15,12 +15,9 @@ import { handleContractError } from '@/utils/dev/handleContractError';
 import useExhibit from '@/lib/useGetExhibitById';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import {
-  calculateTimeLeft,
-} from '@/functonality/countdownTimer';
+import { calculateTimeLeft } from '@/functonality/countdownTimer';
 import { validateTicket } from '@/utils/methods/ticketPurchase/ticketService';
 import { estimateGasFees } from '@/utils/methods/ticketPurchase/gasEstimator';
-
 
 // # TODO : CLEAN UP A BIT MORE
 
@@ -58,7 +55,13 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
 
   // Effect hook to check if the user has already purchased a ticket
   useEffect(() => {
-    validateTicket(userAddress, eventId, setHasTicket, setButtonType, setButtonText);
+    validateTicket(
+      userAddress,
+      eventId,
+      setHasTicket,
+      setButtonType,
+      setButtonText
+    );
   }, [userAddress, eventId]);
 
   // Effect hook for timeouts
@@ -136,7 +139,6 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const ticketPriceFormatted = ethers.utils.formatUnits(ticketPriceWei, 18);
   const ticketPriceWithToken = `${ticketPriceFormatted} USDT`;
 
-
   // function to calculate total price incl. gas fees
   const calculateTotalPrice = () => {
     const ticketPrice = parseFloat(ticketPriceFormatted);
@@ -145,9 +147,17 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     return total.toFixed(2);
   };
 
-    // Estimate gas fees function for app. and purchase to display on total tickt amount on purchase component
+  // Estimate gas fees function for app. and purchase to display on total tickt amount on purchase component
   const handleEstimateGas = async () => {
-    await estimateGasFees(provider, contracts, ticketPrice, eventId, setStatus, setEstimatedGasFees, setIsEstimating);
+    await estimateGasFees(
+      provider,
+      contracts,
+      ticketPrice,
+      eventId,
+      setStatus,
+      setEstimatedGasFees,
+      setIsEstimating
+    );
   };
 
   // pop up component
@@ -273,42 +283,38 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   };
   const buttonConfig = getButtonConfig();
 
-    // Props for TicketPurchaseUI
-    const uiProps = {
-      userAddress,
-      setHasTicket,
-      setButtonType,
-      buttonType,
-      setButtonText,
-      status,
-      purchaseSuccessful,
-      isCountdownOver,
-      showSuccessMessage,
-      togglePopup: () => setIsPopupVisible(!isPopupVisible),
-      purchaseTicket,
-      buttonConfig,
-      isVisible,
-      isPopupVisible,
-      estimatedGasFees,
-      isEstimating,
-      buttonText,
-      isProcessing,
-      setIsHovering,
-      isHovering,
-      closeSuccessMessage,
-      hasTicket,
-      ticketPriceWithToken,
-      calculateTotalPrice,
-      ticketPriceFormatted,
-      validateTicket,
-      // Add more necessary state and functions here
-    };
+  // Props for TicketPurchaseUI
+  const uiProps = {
+    userAddress,
+    setHasTicket,
+    setButtonType,
+    buttonType,
+    setButtonText,
+    status,
+    purchaseSuccessful,
+    isCountdownOver,
+    showSuccessMessage,
+    togglePopup: () => setIsPopupVisible(!isPopupVisible),
+    purchaseTicket,
+    buttonConfig,
+    isVisible,
+    isPopupVisible,
+    estimatedGasFees,
+    isEstimating,
+    buttonText,
+    isProcessing,
+    setIsHovering,
+    isHovering,
+    closeSuccessMessage,
+    hasTicket,
+    ticketPriceWithToken,
+    calculateTotalPrice,
+    ticketPriceFormatted,
+    // Add more necessary state and functions here
+  };
 
   // Render the Ticket Purchase UI
-  return (
-<TicketPurchaseUI {...uiProps} />
-  );
+  return <TicketPurchaseUI {...uiProps} />;
 };
- 
 
 export default TicketPurchaseComponent;

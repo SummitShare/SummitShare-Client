@@ -263,29 +263,28 @@ export interface StepCardProps {
 
 // methods/ticketPPurchaseUI
 export type TicketPurchaseUIProps = {
-  status: string;                      // Status message (e.g., error or success)
-  purchaseSuccessful: boolean;         // Flag indicating if the purchase was successful
-  isCountdownOver: boolean;            // Flag to indicate if the countdown is over
-  showSuccessMessage: boolean;         // Flag to show a success message
-  togglePopup: () => void;             // Function to toggle the popup visibility
+  status: string; // Status message (e.g., error or success)
+  purchaseSuccessful: boolean; // Flag indicating if the purchase was successful
+  isCountdownOver: boolean; // Flag to indicate if the countdown is over
+  showSuccessMessage: boolean; // Flag to show a success message
+  togglePopup: () => void; // Function to toggle the popup visibility
   purchaseTicket: () => Promise<void>; // Function to handle the ticket purchase
   buttonConfig: {
-    text: string;                      // Button text to display
-    action: () => void;                // Function to execute when button is clicked
-    type: 'primary' | 'secondary';     // Button type for styling
+    text: string; // Button text to display
+    action: () => void; // Function to execute when button is clicked
+    type: 'primary' | 'secondary'; // Button type for styling
   };
   setIsHovering: (isHovering: boolean) => void;
-  isHovering : boolean;
-  isVisible: boolean;                  // Visibility flag for a component (possibly the success message)
-  isPopupVisible: boolean;             // Visibility flag for the purchase popup
-  estimatedGasFees: string;            // Estimated gas fees as a string
-  isEstimating: boolean;               // Flag indicating if gas fees are being estimated
-  buttonText: string;                  // Text to display on the button
-  isProcessing: boolean;                // Flag indicating if the purchase process is ongoing
-  closeSuccessMessage: () => void;     // Function to close the success message
-  hasTicket: boolean;                  // Flag to indicate if the user has already purchased a ticket
+  isHovering: boolean;
+  isVisible: boolean; // Visibility flag for a component (possibly the success message)
+  isPopupVisible: boolean; // Visibility flag for the purchase popup
+  estimatedGasFees: string; // Estimated gas fees as a string
+  isEstimating: boolean; // Flag indicating if gas fees are being estimated
+  buttonText: string; // Text to display on the button
+  isProcessing: boolean; // Flag indicating if the purchase process is ongoing
+  closeSuccessMessage: () => void; // Function to close the success message
+  hasTicket: boolean; // Flag to indicate if the user has already purchased a ticket
   ticketPriceWithToken: string;
-  calculateTotalPrice : () => ReactNode;
-  ticketPriceFormatted : string;
-
+  calculateTotalPrice: () => ReactNode;
+  ticketPriceFormatted: string;
 };

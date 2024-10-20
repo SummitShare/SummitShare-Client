@@ -30,9 +30,9 @@ export const estimateGasFees = async (
     ]);
     const gasPriceApprove = await provider.getGasPrice();
 
-    const estimatedGasFeesApproveWei = ethers.BigNumber.from(gasLimitApprove.toString()).mul(
-      ethers.BigNumber.from(gasPriceApprove.toString())
-    );
+    const estimatedGasFeesApproveWei = ethers.BigNumber.from(
+      gasLimitApprove.toString()
+    ).mul(ethers.BigNumber.from(gasPriceApprove.toString()));
 
     // Estimate gas for purchase
     let gasLimitPurchase;
@@ -46,17 +46,22 @@ export const estimateGasFees = async (
       gasLimitPurchase = ethers.BigNumber.from('100000'); // fallback gas limit
     }
     const gasPricePurchase = await provider.getGasPrice();
-    const estimatedGasFeesPurchaseWei = ethers.BigNumber.from(gasLimitPurchase.toString()).mul(
-      ethers.BigNumber.from(gasPricePurchase.toString())
-    );
+    const estimatedGasFeesPurchaseWei = ethers.BigNumber.from(
+      gasLimitPurchase.toString()
+    ).mul(ethers.BigNumber.from(gasPricePurchase.toString()));
 
     // Sum up the estimated gas fees
-    const totalEstimatedGasFeesWei = estimatedGasFeesApproveWei.add(estimatedGasFeesPurchaseWei);
+    const totalEstimatedGasFeesWei = estimatedGasFeesApproveWei.add(
+      estimatedGasFeesPurchaseWei
+    );
 
     // Convert Wei to ETH and fetch ETH/USDT price
-    const totalEstimatedGasFeesETH = ethers.utils.formatEther(totalEstimatedGasFeesWei);
+    const totalEstimatedGasFeesETH = ethers.utils.formatEther(
+      totalEstimatedGasFeesWei
+    );
     const ethUsdtPrice = await fetchEthUsdtPrice();
-    const totalEstimatedGasFeesUSDT = parseFloat(totalEstimatedGasFeesETH) * ethUsdtPrice;
+    const totalEstimatedGasFeesUSDT =
+      parseFloat(totalEstimatedGasFeesETH) * ethUsdtPrice;
 
     // Format the result
     const formattedGasFees = formatNumber(totalEstimatedGasFeesUSDT);

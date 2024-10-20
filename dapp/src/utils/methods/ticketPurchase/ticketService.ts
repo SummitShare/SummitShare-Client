@@ -6,7 +6,9 @@ export const validateTicket = async (
   userAddress: string | undefined,
   eventId: string,
   setHasTicket: React.Dispatch<React.SetStateAction<boolean>>,
-  setButtonType: React.Dispatch<React.SetStateAction<"primary" | "secondary" | "tartary" | "subTartary">>,
+  setButtonType: React.Dispatch<
+    React.SetStateAction<'primary' | 'secondary' | 'tartary' | 'subTartary'>
+  >,
   setButtonText: React.Dispatch<React.SetStateAction<string>>
 ) => {
   // Early return if no userAddress

@@ -126,7 +126,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
 
   // Check for exhibitID from query client
   if (!exhibit) {
-    return <div>Loading or no Matching Exhibit Found.</div>;
+    return <div>Loading Exhibit</div>;
   }
 
   // set ticket price from object pulled from subgraph

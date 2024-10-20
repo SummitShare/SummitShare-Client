@@ -1,43 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
+import React, { useState, useEffect, ReactNode } from 'react';
 import Buttons from '@/app/components/button/Butons';
 import WalletStatus from '@/functonality/walletStatus';
 import Image from 'next/image';
-import { fetchEthUsdtPrice } from '@/utils/methods/ticketPurchase/eth_usd_price';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import useExhibit from '@/lib/useGetExhibitById'; // Your subgraph query hook
+import useExhibit from '@/lib/useGetExhibitById';
 import { CONTRACT_ADDRESSES } from '@/utils/dev/contractInit';
-import { Exhibit } from '@/utils/dev/frontEndInterfaces';
-
-export type TicketPurchaseUIProps = {
-    status: string;                      // Status message (e.g., error or success)
-    purchaseSuccessful: boolean;         // Flag indicating if the purchase was successful
-    isCountdownOver: boolean;            // Flag to indicate if the countdown is over
-    showSuccessMessage: boolean;         // Flag to show a success message
-    togglePopup: () => void;             // Function to toggle the popup visibility
-    purchaseTicket: () => Promise<void>; // Function to handle the ticket purchase
-    buttonConfig: {
-      text: string;                      // Button text to display
-      action: () => void;                // Function to execute when button is clicked
-      type: 'primary' | 'secondary';     // Button type for styling
-    };
-    isHovering : boolean;
-    isVisible: boolean;                  // Visibility flag for a component (possibly the success message)
-    isPopupVisible: boolean;             // Visibility flag for the purchase popup
-    estimatedGasFees: string;            // Estimated gas fees as a string
-    isEstimating: boolean;               // Flag indicating if gas fees are being estimated
-    buttonText: string;                  // Text to display on the button
-    isProcessing: boolean;                // Flag indicating if the purchase process is ongoing
-    closeSuccessMessage: () => void;     // Function to close the success message
-    hasTicket: boolean;                  // Flag to indicate if the user has already purchased a ticket
-    ticketPriceWithToken: string;
-    calculateTotalPrice : () => void;
-    ticketPriceFormatted : string;
-
-  };
-  
-
+import { TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces';
 
 
 const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
@@ -54,18 +23,16 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
     isEstimating,
     buttonText,
     isProcessing,
+    setIsHovering,
     isHovering,
     closeSuccessMessage,
-    hasTicket,
     ticketPriceWithToken,
     calculateTotalPrice,
     ticketPriceFormatted,
  }) => {
+  const exhibitId = CONTRACT_ADDRESSES.exhibitId;
+  const exhibit = useExhibit(exhibitId);
 
-    const exhibitId = CONTRACT_ADDRESSES.exhibitId;
-    const eventId = CONTRACT_ADDRESSES.eventId;
-
-    const exhibit = useExhibit(exhibitId);
     return (
         <>
           <div className="transform scale-200">
@@ -121,7 +88,9 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
                   ✕
                 </button>
                 <h2 className="text-lg font-semibold mb-4 text-center">
-                  {exhibit.exhibitDetails[0]?.name}
+                {exhibit?.exhibitDetails && exhibit.exhibitDetails.length > 0
+                  ? exhibit.exhibitDetails[0].name
+                  : 'No Exhibit Name Available'}
                 </h2>
     
                 <div className="mb-4 text-center">

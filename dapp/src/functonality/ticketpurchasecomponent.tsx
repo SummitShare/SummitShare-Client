@@ -11,23 +11,18 @@ import {
   estimateGas,
 } from '@/utils/dev/contractInit';
 import TicketPurchaseUI from '@/utils/methods/ticketPurchase/ticketPurchaseUI';
-import { fetchEthUsdtPrice } from '@/utils/methods/ticketPurchase/eth_usd_price';
 import { handleContractError } from '@/utils/dev/handleContractError';
 import useExhibit from '@/lib/useGetExhibitById';
 import { useSession } from 'next-auth/react';
-import Buttons from '@/app/components/button/Butons';
-import WalletStatus from './walletStatus';
-import Image from 'next/image';
 import axios from 'axios';
 import {
   calculateTimeLeft,
 } from '@/functonality/countdownTimer';
 import { validateTicket } from '@/utils/methods/ticketPurchase/ticketService';
 import { estimateGasFees } from '@/utils/methods/ticketPurchase/gasEstimator';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 
-// # TODO : CLEAN UP A LOT
+
+// # TODO : CLEAN UP A BIT MORE
 
 const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const session = useSession();
@@ -46,7 +41,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const host = process.env.NEXT_PUBLIC_HOST;
   const url = '${host}/api/v1/events/tickets/create';
 
-  // Hardcoded exhibit ID for demo
+  // event & exhibit ID values
   const exhibitId = CONTRACT_ADDRESSES.exhibitId;
   const eventId = CONTRACT_ADDRESSES.eventId;
 
@@ -62,7 +57,6 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
   const [isHovering, setIsHovering] = useState(false);
 
   // Effect hook to check if the user has already purchased a ticket
-
   useEffect(() => {
     validateTicket(userAddress, eventId, setHasTicket, setButtonType, setButtonText);
   }, [userAddress, eventId]);
@@ -134,7 +128,6 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
 
   // set ticket price from object pulled from subgraph
   const ticketPrice = exhibit.exhibitDetails[0]?.ticketPrice || '';
-
   // Exhibit Details
   //console.log("details:", exhibit);
 
@@ -278,11 +271,15 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       type: 'primary' as 'primary',
     };
   };
-
   const buttonConfig = getButtonConfig();
 
     // Props for TicketPurchaseUI
     const uiProps = {
+      userAddress,
+      setHasTicket,
+      setButtonType,
+      buttonType,
+      setButtonText,
       status,
       purchaseSuccessful,
       isCountdownOver,
@@ -296,13 +293,14 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       isEstimating,
       buttonText,
       isProcessing,
+      setIsHovering,
       isHovering,
       closeSuccessMessage,
       hasTicket,
       ticketPriceWithToken,
       calculateTotalPrice,
       ticketPriceFormatted,
-
+      validateTicket,
       // Add more necessary state and functions here
     };
 

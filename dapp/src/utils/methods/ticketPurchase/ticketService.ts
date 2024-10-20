@@ -6,13 +6,12 @@ export const validateTicket = async (
   userAddress: string | undefined,
   eventId: string,
   setHasTicket: React.Dispatch<React.SetStateAction<boolean>>,
-  setButtonType: React.Dispatch<React.SetStateAction<string>>,
+  setButtonType: React.Dispatch<React.SetStateAction<"primary" | "secondary" | "tartary" | "subTartary">>,
   setButtonText: React.Dispatch<React.SetStateAction<string>>
 ) => {
   // Early return if no userAddress
   if (!userAddress) {
     setHasTicket(false);
-    setButtonType('connect');
     setButtonText('Connect Wallet');
     return;
   }
@@ -24,19 +23,19 @@ export const validateTicket = async (
     });
     if (response.data.hasTicket) {
       setHasTicket(true);
-      setButtonType('secondary');
+      setButtonType('secondary'); // Valid value
       setButtonText('View Exhibit');
     } else {
       // Handle case where user doesn't have a ticket
       setHasTicket(false);
-      setButtonType('primary');
+      setButtonType('primary'); // Valid value
       setButtonText('Purchase Ticket');
     }
   } catch (error) {
     console.error('Error validating ticket:', error);
     // Handle error state
     setHasTicket(false);
-    setButtonType('primary');
+    setButtonType('primary'); // Valid value
     setButtonText('Purchase Ticket');
   }
 };

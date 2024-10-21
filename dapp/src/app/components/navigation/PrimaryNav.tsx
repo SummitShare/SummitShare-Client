@@ -40,9 +40,7 @@ const PrimaryNav: React.FC = () => {
     },
     {
       title: 'Help',
-      items: [
-        { name: 'Help', link: '/help' },
-      ]
+      items: [{ name: 'Help', link: '/help' }],
     },
     {
       title: 'Dashboard',
@@ -66,7 +64,7 @@ const PrimaryNav: React.FC = () => {
 
   return (
     <nav className="w-full">
-      <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
+      <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-20 bg-white">
         <li>
           <a href="/">
             <h2>

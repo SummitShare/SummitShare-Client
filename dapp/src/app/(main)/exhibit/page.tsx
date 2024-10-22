@@ -2,15 +2,27 @@
 import Buttons from '@/app/components/button/Butons';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { validatePageAccess } from '@/utils/methods/ticketPurchase/ticketService';
 
 import { useAccount } from 'wagmi';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const { address } = useAccount();
   const userAddress = address;
+
+  const router = useRouter();
+  const session = useSession();
+
+  useEffect(() => {
+    // @ts-ignore
+    validatePageAccess(address, router, session);
+  }, [address, router, session]);
+
   const women = [
     {
       name: 'Julia Chikamoneka',

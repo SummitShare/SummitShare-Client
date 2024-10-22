@@ -81,8 +81,8 @@ const Unauthorized401 = () => {
             lineHeight: '1.6',
           }}
         >
-          Looks like you need a ticket to view this exhibit! Don&apos;t worry, our
-          friendly guard dog is just doing his job.
+          Looks like you need a ticket to view this exhibit! Don&apos;t worry,
+          our friendly guard dog is just doing his job.
         </p>
 
         <div

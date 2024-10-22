@@ -19,7 +19,7 @@ export const validateTicket = async (
   }
 
   try {
-    const response = await axios.post('/api/validateTicket', {
+    const response = await axios.post('/api/v1/events/tickets/validate', {
       userAddress,
       eventId,
     });

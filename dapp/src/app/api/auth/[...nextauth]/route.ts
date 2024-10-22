@@ -43,7 +43,7 @@ const handler = NextAuth({
         if (!user) {
           return null;
         }
-
+        console.log(`logged in user is ${user.id}`)
         // return json object with the user data
         return {
           id: user.id,
@@ -54,6 +54,7 @@ const handler = NextAuth({
           type: user.type,
           user_wallets: user.user_wallets,
         };
+
       },
     }),
   ],
@@ -87,7 +88,8 @@ const handler = NextAuth({
         type: token.type,
         user_wallets: token.user_wallets,
       };
-
+      console.log(`logged in user session ${session.token.id}`)
+      console.log(`session ${session.token.id}`)
       return session;
     },
   },

@@ -40,7 +40,7 @@ export async function POST(request: Request, response: NextResponse) {
           { message: 'wallet already exists' },
           { status: 409 }
         );
-      } 
+      }
     }
 
     // Calculate the index for the new wallet. If wallets exist, increment the highest index by 1; otherwise, start at 1.

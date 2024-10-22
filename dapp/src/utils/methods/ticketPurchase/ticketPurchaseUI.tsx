@@ -10,61 +10,53 @@ import { TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces';
 import { useAccount, useConnect } from 'wagmi';
 
 const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
-    // User and Authentication
-    userAddress,
-    setHasTicket,
-    hasTicket,
-  
-    // Button States and Controls
-    buttonType,
-    setButtonType,
-    buttonText,
-    buttonConfig,
-    isProcessing,
-  
-    // Status and Messages
-    status,
-    isVisible,
-    showSuccessMessage,
-    closeSuccessMessage,
-  
-    // Purchase State
-    purchaseSuccessful,
-    isCountdownOver,
-  
-    // Popup and Interaction States
-    isPopupVisible,
-    togglePopup,
-    isHovering,
-    setIsHovering,
-  
-    // Price and Gas Information
-    estimatedGasFees,
-    isEstimating,
-    ticketPriceWithToken,
-    ticketPriceFormatted,
-    calculateTotalPrice,
-  
-    // Core Functions
-    purchaseTicket,
+  // User and Authentication
+  userAddress,
+  setHasTicket,
+  hasTicket,
+
+  // Button States and Controls
+  buttonType,
+  setButtonType,
+  buttonText,
+  buttonConfig,
+  isProcessing,
+
+  // Status and Messages
+  status,
+  isVisible,
+  showSuccessMessage,
+  closeSuccessMessage,
+
+  // Purchase State
+  purchaseSuccessful,
+  isCountdownOver,
+
+  // Popup and Interaction States
+  isPopupVisible,
+  togglePopup,
+  isHovering,
+  setIsHovering,
+
+  // Price and Gas Information
+  estimatedGasFees,
+  isEstimating,
+  ticketPriceWithToken,
+  ticketPriceFormatted,
+  calculateTotalPrice,
+
+  // Core Functions
+  purchaseTicket,
 }) => {
   const { isConnected } = useAccount();
 
-    // Determine button text based on wallet connection
-    const getButtonText = () => {
-      if (isProcessing) return 'Processing...';
-      if (!isConnected) return 'Connect Wallet';
-      return buttonConfig.text;
-    };
+  // Determine button text based on wallet connection
+  const getButtonText = () => {
+    if (isProcessing) return 'Processing...';
+    if (!isConnected) return 'Connect Wallet';
+    return buttonConfig.text;
+  };
 
-    // Determine button action based on wallet connection
-    const handleButtonClick = () => {
-      if (!isConnected) {
-        useConnect();
-        return;
-      }
-      buttonConfig.action();
-    };
   const exhibitId = CONTRACT_ADDRESSES.exhibitId;
   const exhibit = useExhibit(exhibitId);
 
@@ -213,7 +205,6 @@ const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
             </div>
 
             <Buttons type="primary" size="large" onClick={purchaseTicket}>
-
               {buttonText}
             </Buttons>
 

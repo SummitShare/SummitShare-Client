@@ -4,17 +4,27 @@ import { useSession } from 'next-auth/react';
 import { TicketPurchaseProps } from '@/utils/dev/typeInit';
 import { CONTRACT_ADDRESSES, contracts } from '@/utils/dev/contractInit';
 import useExhibit from '@/lib/useGetExhibitById';
-import { useWeb3Provider, useTicketState, useCountdown } from '@/utils/methods/ticketPurchase/ticketPurchaseHooks';
+import {
+  useWeb3Provider,
+  useTicketState,
+  useCountdown,
+} from '@/utils/methods/ticketPurchase/ticketPurchaseHooks';
 import { handleTicketPurchase } from '@/utils/methods/ticketPurchase/ticketPurchaseLogic';
 import TicketPurchaseUI from '@/utils/methods/ticketPurchase/ticketPurchaseUI';
 import { estimateGasFees } from '@/utils/methods/ticketPurchase/gasEstimator';
 import { ethers } from 'ethers';
 
-const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
+const TicketPurchaseComponent = ({ userAddress, user_id }: TicketPurchaseProps) => {
   const session = useSession();
   const { provider, status, setStatus } = useWeb3Provider();
-  const { hasTicket, buttonType, buttonText, setButtonText, setButtonType, setHasTicket } = 
-    useTicketState(userAddress, CONTRACT_ADDRESSES.eventId);
+  const {
+    hasTicket,
+    buttonType,
+    buttonText,
+    setButtonText,
+    setButtonType,
+    setHasTicket,
+  } = useTicketState(userAddress, CONTRACT_ADDRESSES.eventId, user_id);
   const isCountdownOver = useCountdown();
 
   // UI State
@@ -63,23 +73,26 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       provider,
       ticketPrice: ticketPriceWei.toString(),
       eventId: CONTRACT_ADDRESSES.eventId,
-      userId: session.data?.token.id || '',
+      user_id: session.data?.token.id || '',
       setStatus,
       setIsProcessing,
       setButtonText,
       setPurchaseSuccessful,
-      setShowSuccessMessage
+      setShowSuccessMessage,
     });
   };
 
   const getButtonConfig = () => ({
-    text: purchaseSuccessful 
-      ? isCountdownOver ? 'View Exhibit' : 'Ticket Purchased ✓'
+    text: purchaseSuccessful
+      ? isCountdownOver
+        ? 'View Exhibit'
+        : 'Ticket Purchased ✓'
       : 'Purchase',
-    action: purchaseSuccessful && isCountdownOver
-      ? () => window.open('https://summitshare.co/exhibit', '_blank')
-      : togglePopup,
-    type: purchaseSuccessful ? 'secondary' as const : 'primary' as const
+    action:
+      purchaseSuccessful && isCountdownOver
+        ? () => window.open('https://summitshare.co/exhibit', '_blank')
+        : togglePopup,
+    type: purchaseSuccessful ? ('secondary' as const) : ('primary' as const),
   });
 
   // Props for UI component
@@ -108,9 +121,10 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
     buttonConfig: getButtonConfig(),
     closeSuccessMessage: () => setShowSuccessMessage(false),
     calculateTotalPrice: () => {
-      const total = parseFloat(ticketPriceFormatted) + parseFloat(estimatedGasFees);
+      const total =
+        parseFloat(ticketPriceFormatted) + parseFloat(estimatedGasFees);
       return total.toFixed(2);
-    }
+    },
   };
 
   return <TicketPurchaseUI {...uiProps} />;

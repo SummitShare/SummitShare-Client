@@ -63,7 +63,7 @@ const TicketPurchaseComponent = ({ userAddress }: TicketPurchaseProps) => {
       provider,
       ticketPrice: ticketPriceWei.toString(),
       eventId: CONTRACT_ADDRESSES.eventId,
-      userId: session.data?.user.id || '',
+      userId: session.data?.token.id || '',
       setStatus,
       setIsProcessing,
       setButtonText,

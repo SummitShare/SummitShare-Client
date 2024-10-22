@@ -276,7 +276,9 @@ export interface TicketPurchaseUIProps {
 
   // Button States and Controls
   buttonType: 'primary' | 'secondary' | 'tartary' | 'subTartary';
-  setButtonType: (type: 'primary' | 'secondary' | 'tartary' | 'subTartary') => void;
+  setButtonType: (
+    type: 'primary' | 'secondary' | 'tartary' | 'subTartary'
+  ) => void;
   buttonText: string;
   buttonConfig: ButtonConfig;
   isProcessing: boolean;
@@ -323,7 +325,9 @@ export interface PurchaseResult {
 }
 
 // Optional: Add validation helper
-export const validateTicketPurchaseProps = (props: Partial<TicketPurchaseUIProps>): props is TicketPurchaseUIProps => {
+export const validateTicketPurchaseProps = (
+  props: Partial<TicketPurchaseUIProps>
+): props is TicketPurchaseUIProps => {
   const requiredProps: (keyof TicketPurchaseUIProps)[] = [
     'userAddress',
     'setHasTicket',
@@ -348,10 +352,10 @@ export const validateTicketPurchaseProps = (props: Partial<TicketPurchaseUIProps
     'calculateTotalPrice',
     'ticketPriceFormatted',
     'isHovering',
-    'setIsHovering'
+    'setIsHovering',
   ];
 
-  return requiredProps.every(prop => prop in props);
+  return requiredProps.every((prop) => prop in props);
 };
 
 // utils/ticketPurchaseLogic
@@ -360,10 +364,10 @@ export interface PurchaseHandlerProps {
   provider: ethers.providers.Web3Provider | null;
   ticketPrice: string;
   eventId: string;
-  userId: string;
+  user_id: string;
   setStatus: (status: string) => void;
   setIsProcessing: (isProcessing: boolean) => void;
   setButtonText: (text: string) => void;
   setPurchaseSuccessful: (success: boolean) => void;
-  setShowSuccessMessage: (show: boolean) => void; 
+  setShowSuccessMessage: (show: boolean) => void;
 }

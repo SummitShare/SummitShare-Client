@@ -185,14 +185,14 @@ export default function Cya() {
             </div>
 
             {/*  Different color */}
-            {/* <Link
+             <Link
                href="https://summitshare.co/blog/SJZH2lwwA"
                className="text-lg text-white underline hover:text-gray-300 transition-colors mt-10 md:mt-6"
                target="_blank"
                rel="noopener noreferrer"
             >
                learn more here
-            </Link> */}
+            </Link> 
          </div>
       </main>
    );

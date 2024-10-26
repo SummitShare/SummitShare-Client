@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Input from '../inputs/Inputs';
+import Link from 'next/link';
 
 function footer() {
    return (
@@ -25,15 +26,15 @@ function footer() {
 
                      <ul className="text-stone-600">
                         <li>
-                           <a href="/blog">Blogs</a>
+                        <Link href="/blog" passHref> </Link>
                         </li>
                         <li>
-                           <a href="https://www.kraken.com/learn/web3-wallets">
+                           <Link href="https://www.kraken.com/learn/web3-wallets">
                               Help
-                           </a>
+                           </Link>
                         </li>
                         <li>
-                           <a href="/partners">Partners</a>
+                           <Link href="/partners">Partners</Link>
                         </li>
                      </ul>
                   </li>
@@ -42,13 +43,13 @@ function footer() {
                      <h3>Other links</h3>
                      <ul>
                         <li>
-                           <a href="/donate">Donate</a>
+                           <Link href="/donate">Donate</Link>
                         </li>
                         <li>
-                           <a href="/distribution">Exhibit</a>
+                           <Link href="/distribution">Exhibit</Link>
                         </li>
                         <li>
-                           <a href="/profile">Profile</a>
+                           <Link href="/profile">Profile</Link>
                         </li>
                      </ul>
                   </li>
@@ -68,7 +69,7 @@ function footer() {
                            </a>
                         </li>
                         <li>
-                           <a href="https://t.me/+X3VvXwhsHnEwNTc0">Telegram</a>
+                           <Link href="https://t.me/+X3VvXwhsHnEwNTc0">Telegram</Link>
                         </li>
                      </ul>
                   </li>

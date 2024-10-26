@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic';
 const Calabash = dynamic(() => import('@/app/components/3DCanvas/models/Calabash').then((mod) => mod.Calabash), { ssr: false });
 const Drum = dynamic(() => import('@/app/components/3DCanvas/models/Drum').then((mod) => mod.Drum), { ssr: false });
 const Mask = dynamic(() => import('@/app/components/3DCanvas/models/Mask').then((mod) => mod.Mask), { ssr: false });
-const Snuff = dynamic(() => import('@/app/components/3DCanvas/models/Snuff') as unknown as Promise<React.ComponentType>, { ssr: false });
-const Cowry = dynamic(() => import('@/app/components/3DCanvas/models/Cowry') as unknown as Promise<React.ComponentType>, { ssr: false });
-const Headrest = dynamic(() => import('@/app/components/3DCanvas/models/Headrest') as unknown as Promise<React.ComponentType>, { ssr: false });
+const Snuff = dynamic(() => import('@/app/components/3DCanvas/models/Snuff').then ((mod) => mod.Snuff), { ssr: false });
+const Cowry = dynamic(() => import('@/app/components/3DCanvas/models/Cowry').then((mod) => mod.Cowry), { ssr: false });
+const Headrest = dynamic(() => import('@/app/components/3DCanvas/models/Headrest').then((mod) => mod.Headrest), { ssr: false });
 import { ObjectDescription } from '@/utils/dev/frontEndInterfaces';
 
 export const data : ObjectDescription[] = [

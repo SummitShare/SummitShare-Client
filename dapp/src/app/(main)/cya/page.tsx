@@ -7,6 +7,7 @@ import {
 } from '@/functonality/countdownTimer';
 import TicketPurchaseComponent from '@/functonality/ticketpurchasecomponent';
 import Link from 'next/link';
+import useTicketCount from '@/lib/getTickets';
 
 const ResponsiveVideo: React.FC = () => {
    const [isMobile, setIsMobile] = useState(false);
@@ -54,6 +55,7 @@ export default function Cya() {
    const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
    const [isClient, setIsClient] = useState(false);
    const [isComplete, setIsComplete] = useState(false);
+   const ticketCount = useTicketCount();
 
    // Check if we are running in the browser
    useEffect(() => {
@@ -169,8 +171,7 @@ export default function Cya() {
 
                   {/* Second section: Incrementing Tickets Sold */}
                   <div className="flex flex-col items-center">
-                     {/* #TODO implement live tracking or periodical tracking */}
-                     <div className="text-6xl font-bold">5</div>
+                     <div className="text-6xl font-bold">{ticketCount}</div>
                      <div className="text-lg text-gray-300">Tickets Sold</div>
                   </div>
 

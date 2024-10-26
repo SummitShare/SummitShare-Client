@@ -47,6 +47,7 @@ const useExhibit = (id: string): Exhibit | null => {
 
    const { data } = useQuery<{ exhibit: Exhibit }>(EXHIBIT_QUERY, {
       variables: { id },
+      fetchPolicy: "cache-and-network"
    });
 
    useEffect(() => {

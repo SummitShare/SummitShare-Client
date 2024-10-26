@@ -1,5 +1,3 @@
-import { IPropsal, EmailArray } from '@/utils/dev/typeInit';
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import prisma from '../../../../../../../config/db';
 import { randomUUID } from 'node:crypto';

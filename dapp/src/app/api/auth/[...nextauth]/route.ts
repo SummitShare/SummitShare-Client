@@ -1,5 +1,5 @@
 import { passwordCompare } from '@/utils/methods/auth/passwordCompare';
-import NextAuth, { User } from 'next-auth';
+import NextAuth, { DefaultSession, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
 
@@ -23,8 +23,8 @@ interface CustomUser {
 declare module 'next-auth' {
    interface User extends CustomUser {}
 
-   interface Session {
-      user: CustomUser;
+   interface Session extends DefaultSession {
+      user: any;
    }
 }
 

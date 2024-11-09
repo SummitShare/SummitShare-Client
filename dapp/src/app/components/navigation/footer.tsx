@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Input from '../inputs/Inputs';
+import Link from 'next/link';
 
 function footer() {
    return (
@@ -25,7 +26,7 @@ function footer() {
 
                      <ul className="text-stone-600">
                         <li>
-                           <a href="/blog">Blogs</a>
+                           <Link href="/blog">Blogs</Link>
                         </li>
                         <li>
                            <a href="https://www.kraken.com/learn/web3-wallets">

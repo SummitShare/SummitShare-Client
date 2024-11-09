@@ -50,7 +50,10 @@ const PrimaryNav: React.FC = () => {
          title: 'Settings',
          items: [
             { name: 'Profile', link: '/profile' },
-            { name: 'Log Out', link: '/auth-sign-in' },
+            {
+               name: session?.status === 'authenticated' ? 'Log Out' : 'Log In',
+               link: session?.status === 'authenticated' ? '/auth-sign-in' : '/auth-sign-in',
+            },
          ],
       },
    ];
@@ -66,11 +69,11 @@ const PrimaryNav: React.FC = () => {
       <nav className="w-full">
          <ul className="fixed top-0 inset-x-0 px-6 py-4 lg:px-28 lg:py-6 flex flex-row justify-between items-center border-b border-primary-900-5 text-primary-900 z-10 bg-white">
             <li>
-               <a href="/">
+               <Link href="/">
                   <h2>
                      <span className="text-primary-400">Summit</span>Share
                   </h2>
-               </a>
+               </Link>
             </li>
             <li className="sm:block hidden md:hidden lg:block">
                <ul className="flex flex-row gap-6 text-p1-m text-primary-100">

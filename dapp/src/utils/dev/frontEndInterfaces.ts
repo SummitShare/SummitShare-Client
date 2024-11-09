@@ -239,7 +239,6 @@ export interface ObjectDescription {
    object_name: string;
    Object_description: string[][];
    Figure_artifact_details: string;
-   figure_images_URLs: string[];
    figure_details: string[][];
    figure_biography: string[][];
    figure_references: string[][];

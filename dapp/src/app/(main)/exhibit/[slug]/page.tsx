@@ -5,7 +5,7 @@ import Buttons from '@/app/components/button/Butons';
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
 
-
+import { useRouter } from 'next/navigation';
 
 // Fetch the data based on the slug
 const getData = (slug: string) => {
@@ -19,6 +19,7 @@ interface PageProps {
 }
 
 const Page = ({ params }: { params: { slug: string } }) => {
+   const router = useRouter();
    const [currentIndex, setCurrentIndex] = useState(() =>
       data.findIndex(
          (item) => item.title.toLowerCase().replace(/ /g, '-') === params.slug
@@ -46,7 +47,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
    };
 
    const handleClose = () => {
-      window.location.href = '/exhibit';
+      router.push('/exhibit');
    };
 
    return (

@@ -26,15 +26,15 @@ function footer() {
 
                      <ul className="text-stone-600">
                         <li>
-                        <Link href="/blog" passHref> </Link>
+                           <Link href="/blog">Blogs</Link>
                         </li>
                         <li>
-                           <Link href="https://www.kraken.com/learn/web3-wallets">
+                           <a href="https://www.kraken.com/learn/web3-wallets">
                               Help
-                           </Link>
+                           </a>
                         </li>
                         <li>
-                           <Link href="/partners">Partners</Link>
+                           <a href="/partners">Partners</a>
                         </li>
                      </ul>
                   </li>
@@ -43,13 +43,13 @@ function footer() {
                      <h3>Other links</h3>
                      <ul>
                         <li>
-                           <Link href="/donate">Donate</Link>
+                           <a href="/donate">Donate</a>
                         </li>
                         <li>
-                           <Link href="/distribution">Exhibit</Link>
+                           <a href="/distribution">Exhibit</a>
                         </li>
                         <li>
-                           <Link href="/profile">Profile</Link>
+                           <a href="/profile">Profile</a>
                         </li>
                      </ul>
                   </li>
@@ -69,7 +69,7 @@ function footer() {
                            </a>
                         </li>
                         <li>
-                           <Link href="https://t.me/+X3VvXwhsHnEwNTc0">Telegram</Link>
+                           <a href="https://t.me/+X3VvXwhsHnEwNTc0">Telegram</a>
                         </li>
                      </ul>
                   </li>

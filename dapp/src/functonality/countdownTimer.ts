@@ -7,7 +7,7 @@ export interface TimeLeft {
 }
 
 export const calculateTimeLeft = (): TimeLeft | null => {
-   const targetDate = new Date('2024-11-01T00:00:00Z'); // TZ UTC 0
+   const targetDate = new Date('2024-11-15T00:00:00Z'); // TZ UTC 0
    const currentDate = new Date();
    const difference = targetDate.getTime() - currentDate.getTime();
 

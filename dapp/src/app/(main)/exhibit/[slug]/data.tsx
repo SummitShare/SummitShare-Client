@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic';
 const Calabash = dynamic(() => import('@/app/components/3DCanvas/models/Calabash').then((mod) => mod.Calabash), { ssr: false });
 const Drum = dynamic(() => import('@/app/components/3DCanvas/models/Drum').then((mod) => mod.Drum), { ssr: false });
 const Mask = dynamic(() => import('@/app/components/3DCanvas/models/Mask').then((mod) => mod.Mask), { ssr: false });
-const Snuff = dynamic(() => import('@/app/components/3DCanvas/models/Snuff').then ((mod) => mod.Snuff), { ssr: false });
-const Cowry = dynamic(() => import('@/app/components/3DCanvas/models/Cowry').then((mod) => mod.Cowry), { ssr: false });
-const Headrest = dynamic(() => import('@/app/components/3DCanvas/models/Headrest').then((mod) => mod.Headrest), { ssr: false });
+const Snuff = dynamic(() => import('@/app/components/3DCanvas/models/Snuff').then((mod) => mod.Snuff), { ssr: false });
+const Cowry = dynamic(() => import('@/app/components/3DCanvas/models/Cowry') .then((mod) => mod.Cowry), { ssr: false });
+const Headrest = dynamic(() => import('@/app/components/3DCanvas/models/Headrest') .then((mod) => mod.Headrest), { ssr: false });
 import { ObjectDescription } from '@/utils/dev/frontEndInterfaces';
 
 export const data : ObjectDescription[] = [
@@ -175,7 +175,7 @@ export const data : ObjectDescription[] = [
     // Snuff Cup - Lueji Wa Nkonde
     {
        title: 'Lueji Wa Nkonde',
-       object_URL: <Snuff />,
+       object_URL: <Snuff levelOfDetail='high' />,
        object_name: 'Snuff Cup',
        Object_description: [
           ['Used to store and carry snuff (Tobacco).'],

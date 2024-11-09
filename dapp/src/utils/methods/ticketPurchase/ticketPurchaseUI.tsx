@@ -7,7 +7,7 @@ import Link from 'next/link';
 import useExhibit from '@/lib/useGetExhibitById';
 import { CONTRACT_ADDRESSES } from '@/utils/dev/contractInit';
 import { TicketPurchaseUIProps } from '@/utils/dev/frontEndInterfaces';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount } from 'wagmi';
 
 const TicketPurchaseUI: React.FC<TicketPurchaseUIProps> = ({
    // User and Authentication

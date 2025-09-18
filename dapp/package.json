@@ -40,7 +40,7 @@
       "@types/bcryptjs": "^2.4.5",
       "@types/three": "^0.165.0",
       "alchemy-sdk": "^2.10.1",
-      "axios": "^1.6.8",
+      "axios": "^1.12.0",
       "bcrypt": "^5.1.1",
       "bcryptjs": "^2.4.3",
       "class-variance-authority": "^0.7.0",
